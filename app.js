@@ -442,13 +442,16 @@
 
 
   function cheatCode(){
+    console.log('Cheat function called');
     const code = prompt('Enter code:');
+    console.log('Code entered:', code);
     if(code === '11012012'){
       balance *= 2;
       updateBalance();
       saveGame();
       showMessage('Balance doubled! 💰');
       sfx('win');
+      console.log('Balance doubled to:', balance);
     } else {
       showMessage('Invalid code.');
     }
@@ -468,7 +471,7 @@
   btnImport.addEventListener('click', ()=>{ importFile.click(); });
   importFile.addEventListener('change', (e)=>{ if(e.target.files && e.target.files[0]) importSaveFile(e.target.files[0]); importFile.value=''; });
   btnLeader.addEventListener('click', ()=>{ showLeaderboard(); });
-  btnCheat.addEventListener('click', ()=>{ cheatCode(); });
+  if(btnCheat) btnCheat.addEventListener('click', ()=>{ cheatCode(); });
   leaderClose && leaderClose.addEventListener('click', ()=>{ leaderModal.classList.add('hidden'); });
   leaderClear && leaderClear.addEventListener('click', ()=>{ if(confirm('Clear leaderboard?')){ setLeaderboard([]); renderLeaderboard(); } });
 
