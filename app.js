@@ -38,6 +38,7 @@
   const leaderList = document.getElementById('leader-list');
   const leaderClose = document.getElementById('leader-close');
   const leaderClear = document.getElementById('leader-clear');
+  const btnCheat = document.getElementById('btn-cheat');
 
   // audio (use small embedded assets where possible)
   let audioCtx = null;
@@ -439,6 +440,20 @@
     saveGame();
   }
 
+
+  function cheatCode(){
+    const code = prompt('Enter code:');
+    if(code === '11012012'){
+      balance *= 2;
+      updateBalance();
+      saveGame();
+      showMessage('Balance doubled! 💰');
+      sfx('win');
+    } else {
+      showMessage('Invalid code.');
+    }
+  }
+
   // UI bindings
   btnPlay.addEventListener('click', ()=>{ menu.classList.add('hidden'); gameScreen.classList.remove('hidden'); loadGameOnEnter(); });
   btnLoad.addEventListener('click', ()=>{ if(loadGame()) menu.classList.add('hidden'), gameScreen.classList.remove('hidden'); else showMessage('No save found'); });
@@ -453,6 +468,7 @@
   btnImport.addEventListener('click', ()=>{ importFile.click(); });
   importFile.addEventListener('change', (e)=>{ if(e.target.files && e.target.files[0]) importSaveFile(e.target.files[0]); importFile.value=''; });
   btnLeader.addEventListener('click', ()=>{ showLeaderboard(); });
+  btnCheat.addEventListener('click', ()=>{ cheatCode(); });
   leaderClose && leaderClose.addEventListener('click', ()=>{ leaderModal.classList.add('hidden'); });
   leaderClear && leaderClear.addEventListener('click', ()=>{ if(confirm('Clear leaderboard?')){ setLeaderboard([]); renderLeaderboard(); } });
 
