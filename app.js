@@ -532,7 +532,9 @@
   window.addEventListener('DOMContentLoaded', init);
 
   // expose helpers
-  window.playBlackJack = {saveGame, loadGame, resetSave, startRound, exportSave, importSaveFile};
+  window.playBlackJack = {saveGame, loadGame, resetSave, startRound, exportSave, importSaveFile, cheatCode};
+  // also expose cheatCode globally for onclick handler
+  window.cheatCode = cheatCode;
 
   document.addEventListener('click', ()=>{ try{ if(!audioCtx) ensureAudio(); if(audioCtx.state==='suspended') audioCtx.resume(); }catch(e){} }, {once:false});
 })();
